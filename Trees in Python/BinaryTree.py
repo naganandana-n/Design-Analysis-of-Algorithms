@@ -3,6 +3,8 @@ BINARY TREE
 -----------
 - EACH NODE HAS 2 CHILDREN (MAX)
 - LEFT CHILD OF BINARY TREE SHOULD BE SMALLER THAN RIGHT CHILD
+
+- REFERENCE: https://www.youtube.com/watch?v=TezryjBe3Ts&list=PLMz1vLpcJgGDeVDybqQeZ0EewZcRF_1m_
 '''
 
 # DEFINING A TREE
