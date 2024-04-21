@@ -84,26 +84,26 @@ def WinCheck(i_sticks, i_playerNum): # WIN OR LOSE CHECKER
             else:
                 print("\tCOMPUTER ERROR!")
         print("*" * 30)
-        return 0
-    return 1
+        return 0 # RETURNS 0, IF SOMEONE WINS / LOSES (IE, GAME OVER!)
+    return 1 # RETURNS 1, IF THE GAME IS STILL GOING ON
 
-if __name__ == '__main__':
-    i_stickTotal = 11
-    i_depth = 4
-    i_curPlayer = 1
+if __name__ == '__main__': # CHECKS TO SEE IF THIS FILE IS THE MAIN FILE BEING RUN
+    i_stickTotal = 11 # DEFAULTS: NO. OF STICKS AT START, 
+    i_depth = 4 # DEPTH WE WANT THE COMPUTER TO CALCULATE TO,
+    i_curPlayer = 1 # CURRENT STARTING PLAYER (HUMAN)
     print(""" INSTRUCTIONS: BE THE PLAYER TO PICK UP THE LAST STICK
           \t\t\tYOU CAN ONLY PICK UP ONE(1) OR TWO(2)
           \t\t\tSTICKS AT A TIME!""")
-    while(i_stickTotal > 0):
+    while(i_stickTotal > 0): # AS LONG AS THERE ARE STICKS, KEEP ITERATING
         print("\n%d STICKS REMAIN. HOW MANY WOULD YOU LIKE TO PICK UP?" %i_stickTotal)
         i_choice = input("\n1 OR 2: ")
-        i_stickTotal -= int(float(i_choice))
-        if WinCheck(i_stickTotal, i_curPlayer):
-            i_curPlayer *= -1
-            node = Node(i_depth, i_curPlayer, i_stickTotal)
-            bestChoice = -100
+        i_stickTotal -= int(float(i_choice)) # SUBTRACT HOW MANY STICKS THE PLAYER CHOSE TO REMOVE
+        if WinCheck(i_stickTotal, i_curPlayer): # WINCHECK TO SEE IF THE PLAYER HAS WON
+            i_curPlayer *= -1 # NEXT PLAYER PLAYS (COMPUTER)
+            node = Node(i_depth, i_curPlayer, i_stickTotal) #CREATE TREE FOR ALGO TO RUN ON
+            bestChoice = -100 
             i_bestValue = -i_curPlayer * maxsize
-            for i in range(len(node.children)):
+            for i in range(len(node.children)): # SAME AS THE PART IN THE ALGORITHM
                 n_child = node.children[i]
                 i_val = MinMax(n_child, i_depth, -i_curPlayer)
                 if (abs(i_curPlayer * maxsize - i_val) <= abs(i_curPlayer * maxsize - i_bestValue)):
@@ -111,6 +111,6 @@ if __name__ == '__main__':
                     bestChoice = i
             bestChoice += 1
             print("COMPUTER CHOOSES: " + str(bestChoice) + "\tBASED ON VALUE: " + str(i_bestValue))
-            i_stickTotal -= bestChoice
+            i_stickTotal -= bestChoice # REDUCE STICK TOTAL BY AMOUNT THAT THE COMPUTER CHOSE
             WinCheck(i_stickTotal, i_curPlayer)
             i_curPlayer *= -1
